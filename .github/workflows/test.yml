@@ -19,12 +19,14 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v1
         with:
-          go-version: 1.24
+          go-version-file: go.mod
         id: go
       - name: "Build Web"
         run: |
           cd web
           yarn && yarn build
+      - name: Download Go modules
+        run: go mod download
       - name: Vet
         run: go vet ./...
       - name: Test
