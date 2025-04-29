@@ -1,5 +1,7 @@
 version: 2
 
+gomod:
+  proxy: true
 builds:
   - binary: gobackup
     env:
@@ -18,3 +20,5 @@ archives:
     formats: ['tar.gz']
 release:
   prerelease: auto
+changelog:
+  disable: true
