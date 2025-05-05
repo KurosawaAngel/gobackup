@@ -60,7 +60,7 @@ func (s *GCS) open() (err error) {
 		//    thus avoiding the need to add use a static secret
 		creds, err := google.FindDefaultCredentials(ctx, storage.ScopeReadWrite)
 		if err != nil {
-			return fmt.Errorf("Cannot find default application credentials: %v", err)
+			return fmt.Errorf("cannot find default application credentials: %v", err)
 		}
 		opt = option.WithCredentials(creds)
 	}

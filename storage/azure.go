@@ -57,7 +57,7 @@ func (s *Azure) open() error {
 
 	credential, err := azidentity.NewClientSecretCredential(tenantId, clientId, clientSecret, nil)
 	if err != nil {
-		return fmt.Errorf("Invalid credentials with error: %w", err)
+		return fmt.Errorf("invalid credentials with error: %w", err)
 	}
 
 	s.client, err = azblob.NewClient(s.getBucketURL(), credential, nil)

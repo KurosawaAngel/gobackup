@@ -2,7 +2,6 @@ package storage
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -61,17 +60,21 @@ func (s *Local) list(parent string) ([]FileItem, error) {
 	remotePath := filepath.Join(s.path, parent)
 	items := []FileItem{}
 
-	files, err := ioutil.ReadDir(remotePath)
+	files, err := os.ReadDir(remotePath)
 	if err != nil {
 		return nil, err
 	}
 
 	for _, file := range files {
 		if !file.IsDir() {
+			info, err := file.Info()
+			if err != nil {
+				return nil, err
+			}
 			items = append(items, FileItem{
-				Filename:     file.Name(),
-				Size:         file.Size(),
-				LastModified: file.ModTime(),
+				Filename:     info.Name(),
+				Size:         info.Size(),
+				LastModified: info.ModTime(),
 			})
 		}
 	}

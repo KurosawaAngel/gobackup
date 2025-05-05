@@ -84,13 +84,14 @@ func notify(model config.ModelConfig, title, message string, notifyType int) {
 			continue
 		}
 
-		if notifyType == notifyTypeSuccess {
+		switch notifyType {
+		case notifyTypeSuccess:
 			if base.onSuccess {
 				if err := notifier.notify(title, message); err != nil {
 					logger.Error(err)
 				}
 			}
-		} else if notifyType == notifyTypeFailure {
+		case notifyTypeFailure:
 			if base.onFailure {
 				if err := notifier.notify(title, message); err != nil {
 					logger.Error(err)

@@ -22,7 +22,9 @@ func TestMkdirP(t *testing.T) {
 	assert.False(t, exist)
 
 	assert.Nil(t, MkdirP(dest))
-	defer os.Remove(dest)
+	defer func() {
+		_ = os.Remove(dest)
+	}()
 	exist = IsExistsPath(dest)
 	assert.True(t, exist)
 }

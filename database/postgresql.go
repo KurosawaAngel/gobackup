@@ -137,7 +137,9 @@ func (db *PostgreSQL) perform() error {
 
 	logger.Info("-> Dumping PostgreSQL...")
 	if len(db.password) > 0 {
-		os.Setenv("PGPASSWORD", db.password)
+		if err := os.Setenv("PGPASSWORD", db.password); err != nil {
+			return err
+		}
 	}
 
 	_, err := helper.Exec(db.build())

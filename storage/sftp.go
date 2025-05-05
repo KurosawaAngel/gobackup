@@ -64,7 +64,7 @@ func (s *SFTP) open() error {
 
 	sshClient, err := ssh.Dial("tcp", s.host+":"+s.port, &clientConfig)
 	if err != nil {
-		return fmt.Errorf("Failed to ssh %s@%s -p %s: %v", s.username, s.host, s.port, err)
+		return fmt.Errorf("failed to ssh %s@%s -p %s: %v", s.username, s.host, s.port, err)
 	}
 
 	client, err := sftp.NewClient(sshClient)

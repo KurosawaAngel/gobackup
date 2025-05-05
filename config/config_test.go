@@ -13,8 +13,12 @@ var (
 )
 
 func init() {
-	os.Setenv("S3_ACCESS_KEY_ID", "xxxxxxxxxxxxxxxxxxxx")
-	os.Setenv("S3_SECRET_ACCESS_KEY", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+	if err := os.Setenv("S3_ACCESS_KEY_ID", "xxxxxxxxxxxxxxxxxxxx"); err != nil {
+		panic(err.Error())
+	}
+	if err := os.Setenv("S3_SECRET_ACCESS_KEY", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"); err != nil {
+		panic(err.Error())
+	}
 	if err := Init(testConfigFile); err != nil {
 		panic(err.Error())
 	}
